@@ -5,6 +5,8 @@ const ASSET_MANAGER = new AssetManager();
 // Queue sprite assets for download
 ASSET_MANAGER.queueDownload('./sprites/link.png');
 ASSET_MANAGER.queueDownload('./sprites/tileset.png');
+ASSET_MANAGER.queueDownload('./sprites/items.png');
+ASSET_MANAGER.queueDownload('./sprites/UI.png');
 
 ASSET_MANAGER.downloadAll(() => {
 	const canvas = document.getElementById("gameWorld");
@@ -15,7 +17,9 @@ ASSET_MANAGER.downloadAll(() => {
 	// Add systems (order matters!)
 	gameEngine.addSystem(new PlayerInputSystem());  // Process input first
 	gameEngine.addSystem(new MovementSystem());     // Then update positions
-	gameEngine.addSystem(new RenderSystem());       // Finally render
+	gameEngine.addSystem(new AnimationSystem());    // Then update animations
+	gameEngine.addSystem(new RenderSystem());       // Render game world
+	gameEngine.addSystem(new UISystem());           // Finally render UI on top
 
 	// Set up level data
 	// TODO: Replace tile indices with correct values from tileset.png
@@ -43,7 +47,7 @@ ASSET_MANAGER.downloadAll(() => {
 	};
 
 	// Create Link at center of screen
-	createLink(gameEngine, 320, 320);
+	createLink(gameEngine, 500, 500);
 
 	gameEngine.start();
 });

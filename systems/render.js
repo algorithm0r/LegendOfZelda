@@ -38,12 +38,12 @@ class RenderSystem {
         const level = game.currentLevel;
         const tileImage = ASSET_MANAGER.getAsset('./sprites/tileset.png');
         
-        // 16 tiles wide, 11 tiles tall (or 12 if you want UI space)
+        // 16 tiles wide, 11 tiles tall (or 15 if you want UI space)
         for (let y = 0; y < level.tiles.length; y++) {
             for (let x = 0; x < level.tiles[y].length; x++) {
                 const tileIndex = level.tiles[y][x];
                 
-                // Tileset has 18 columns
+                // Tileset has 18 columns and 1 pixel spacing
                 const srcX = (tileIndex % 18) * 17 + 1;
                 const srcY = Math.floor(tileIndex / 18) * 17 + 1;
                 
@@ -51,7 +51,7 @@ class RenderSystem {
                 game.ctx.drawImage(
                     tileImage,
                     srcX, srcY, 16, 16,      // Source in tileset
-                    x * 64, (y + 1.5) * 64, 64, 64   // Destination on canvas
+                    x * 64, (y + 4.5) * 64, 64, 64   // Destination on canvas
                 );
             }
         }
