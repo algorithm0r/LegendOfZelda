@@ -22,6 +22,7 @@ class UISystem {
         this.drawCounters(game, player);
         this.drawItemSlots(game, player);
         this.drawHearts(game, player);
+        this.drawMinimap(game, 48, 160);
     }
     
     drawCounters(game, player) {
@@ -168,5 +169,50 @@ class UISystem {
             627, 117, 8, 8,        
             x, y, 32, 32    
         );
+    }
+
+    drawMinimap(game, x, y) {
+        const ctx = game.ctx;
+        // Draw one pixel for each tile in the overworld
+        OVERWORLD.rooms.forEach((row, rowIndex) => {
+            row.forEach((room, colIndex) => {
+                const tiles = room.tiles;
+
+                tiles.forEach((tileRow, tileRowIndex) => {
+                    tileRow.forEach((tile, tileColIndex) => {
+                        // Determine color based on tile type
+                        switch (tile) {
+                            case 6: case 7: case 9: case 10: case 11: case 25: case 26: case 27: case 29: case 42: case 43: case 44: case 45: case 46: case 47: case 60: case 61: case 62: case 63: case 65: 
+                                ctx.fillStyle = 'green';
+                                break;
+                            case 72: case 73: case 74: case 90: case 91: case 92: case 108: case 109: case 110: case 78: case 79: case 80: case 96: case 97: case 98: case 114: case 115: case 116: case 84: case 85: case 86: case 102: case 103: case 104: case 120: case 121: case 122:
+                                ctx.fillStyle = 'blue';
+                                break;
+                            case 0: case 1: case 3: case 4: case 5: case 19: case 20: case 21: case 23: case 36: case 37: case 38: case 39: case 40: case 41: case 54: case 55: case 56: case 57: case 59:  
+                                ctx.fillStyle = 'red';
+                                break;
+                            case 12: case 13: case 15: case 16: case 17: case 31: case 32: case 33: case 35: case 48: case 49: case 50: case 51: case 52: case 53: case 66: case 67: case 68: case 69: case 71:
+                                ctx.fillStyle = 'lightgray';
+                                break;
+                            default:
+                                ctx.fillStyle = 'tan';
+                        }
+                        // Draw pixel   
+                        if(rowIndex === game.currentLevel.row && colIndex === game.currentLevel.col) {
+                            ctx.globalAlpha = 1.0;
+                        } else {
+                            ctx.globalAlpha = 0.5;
+                        }   
+                        ctx.fillRect(
+                            x + (colIndex * 16) + tileColIndex,
+                            y + (rowIndex * 11) + tileRowIndex,
+                            1,
+                            1
+                        );
+                    });
+                });
+            });
+        });
+        ctx.globalAlpha = 1.0;
     }
 }
