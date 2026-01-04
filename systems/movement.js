@@ -7,65 +7,42 @@ class MovementSystem {
                 const newX = entity.position.x + entity.velocity.dx * deltaTime;
                 const newY = entity.position.y + entity.velocity.dy * deltaTime;
                 
-                // Check collision with tilemap
-                if (game.currentLevel && !this.collidesWithTilemap(game, entity, newX, newY)) {
-                    entity.position.x = newX;
-                    entity.position.y = newY;
-                } else if (!game.currentLevel) {
-                    // No level loaded, just move freely
+                // Check collision with tilemap using entity's collider
+                if (game.currentLevel && entity.collider) {
+                    if (!this.collidesWithTilemap(game, entity, newX, newY)) {
+                        entity.position.x = newX;
+                        entity.position.y = newY;
+                    }
+                } else {
+                    // No level or no collider - move freely
                     entity.position.x = newX;
                     entity.position.y = newY;
                 }
                 
-                // Keep entity on screen (fallback bounds)
-                // Account for tilemap offset (4.5 tiles = 288 pixels)
-                const tilemapOffsetY = 4.5 * 64;
-                const playAreaTop = tilemapOffsetY;
-                const playAreaBottom = tilemapOffsetY + (11 * 64);
-                
-                entity.position.x = Math.max(0, Math.min(entity.position.x, game.ctx.canvas.width - 64));
-                entity.position.y = Math.max(playAreaTop, Math.min(entity.position.y, playAreaBottom - 64));
+                // Note: Screen edge handling now done by RoomTransitionSystem
             }
         }
     }
     
-    collidesWithTilemap(game, entity, newX, newY) {
+    collidesWithTilemap(game, entity, x, y) {
         const level = game.currentLevel;
+        const collider = entity.collider;
         
-        // Get collision box (use Collider component if available, otherwise use sprite size)
-        let collisionBox;
-        if (entity.collider) {
-            collisionBox = {
-                x: newX + entity.collider.offsetX,
-                y: newY + entity.collider.offsetY,
-                width: entity.collider.width,
-                height: entity.collider.height
-            };
-        } else {
-            // Fallback to full sprite size
-            collisionBox = {
-                x: newX,
-                y: newY,
-                width: 64,
-                height: 64
-            };
-        }
-        
-        // Tilemap is offset down by 4.5 tiles (288 pixels)
-        const tilemapOffsetY = 4.5 * 64;
+        // Calculate actual collision box position using collider offset
+        const collisionX = x + collider.offsetX;
+        const collisionY = y + collider.offsetY;
         
         // Check the 4 corners of the collision box
         const corners = [
-            { x: collisionBox.x + 2, y: collisionBox.y + 2 },                                    // Top-left
-            { x: collisionBox.x + collisionBox.width - 3, y: collisionBox.y + 2 },               // Top-right
-            { x: collisionBox.x + 2, y: collisionBox.y + collisionBox.height - 3 },              // Bottom-left
-            { x: collisionBox.x + collisionBox.width - 3, y: collisionBox.y + collisionBox.height - 3 }  // Bottom-right
+            { x: collisionX + 8, y: collisionY + 8 },                                    // Top-left (with small margin)
+            { x: collisionX + collider.width - 9, y: collisionY + 8 },                   // Top-right
+            { x: collisionX + 8, y: collisionY + collider.height - 9 },                  // Bottom-left
+            { x: collisionX + collider.width - 9, y: collisionY + collider.height - 9 }  // Bottom-right
         ];
         
         for (let corner of corners) {
-            // Convert world position to tile position (accounting for tilemap offset)
             const tileX = Math.floor(corner.x / 64);
-            const tileY = Math.floor((corner.y - tilemapOffsetY) / 64);
+            const tileY = Math.floor(corner.y / 64);
             
             // Out of bounds check
             if (tileX < 0 || tileY < 0 || 
@@ -74,9 +51,9 @@ class MovementSystem {
                 return true; // Treat out of bounds as solid
             }
             
-            // Check if tile is solid
+            // Check if tile is passable (tile NOT in passableTiles list = solid)
             const tileIndex = level.tiles[tileY][tileX];
-            if (level.solidTiles.includes(tileIndex)) {
+            if (!level.passableTiles.includes(tileIndex)) {
                 return true; // Collided with solid tile
             }
         }

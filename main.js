@@ -17,20 +17,22 @@ ASSET_MANAGER.downloadAll(() => {
 	// Add systems (order matters!)
 	gameEngine.addSystem(new PlayerInputSystem());  // Process input first
 	gameEngine.addSystem(new MovementSystem());     // Then update positions
+	gameEngine.addSystem(new RoomTransitionSystem()); // Handle edge detection & transition animation
 	gameEngine.addSystem(new AnimationSystem());    // Then update animations
 	gameEngine.addSystem(new RenderSystem());       // Render game world
 	gameEngine.addSystem(new UISystem());           // Finally render UI on top
 
-	// Set up level data
-	const row = 0;
-	const col = 15;
+	// Set up current map (overworld for now, dungeons later)
+	gameEngine.currentMap = OVERWORLD;
+	const row = 7;
+	const col = 7;
 	gameEngine.currentLevel = {
 		// 16 tiles wide, 11 tiles tall
 		row: row,
 		col: col,
 		tiles: OVERWORLD.rooms[row][col].tiles,
 		
-		solidTiles: [60, 61, 62, 80, 81, 82] 
+		passableTiles: [2, 22]
 	};
 
 	// Create Link at center of screen

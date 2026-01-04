@@ -54,7 +54,7 @@ function createLink(game, x, y) {
         removeFromWorld: false,
         position: new Position(x, y),
         velocity: new Velocity(0, 0),
-        playercontrolled: new PlayerControlled(150),
+        playercontrolled: new PlayerControlled(240),
         facing: new Facing('down'),  // Start facing down
         sprite: new Sprite(
             ASSET_MANAGER.getAsset('./sprites/link.png'),
@@ -66,9 +66,9 @@ function createLink(game, x, y) {
         animator: new Animator(linkAnimations, 'idle-down'),
         // Collision box - smaller than sprite, positioned at Link's body/feet
         collider: new Collider(
-            64,  // width
-            32,  // height
-            0,   // offsetX - center horizontally
+            60,  // width
+            30,  // height
+            2,   // offsetX - center horizontally
             32   // offsetY - move down so collision is at body/feet
         ),
         // Health - start with 3 full hearts (6 half-hearts)
