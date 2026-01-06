@@ -5,6 +5,8 @@ const ASSET_MANAGER = new AssetManager();
 // Queue sprite assets for download
 ASSET_MANAGER.queueDownload('./sprites/link.png');
 ASSET_MANAGER.queueDownload('./sprites/tileset.png');
+ASSET_MANAGER.queueDownload('./sprites/enemies.png');
+ASSET_MANAGER.queueDownload('./sprites/misc.png');
 ASSET_MANAGER.queueDownload('./sprites/items.png');
 ASSET_MANAGER.queueDownload('./sprites/UI.png');
 

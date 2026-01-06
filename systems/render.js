@@ -51,6 +51,16 @@ class RenderSystem {
                     game.ctx.fillRect(entity.position.x, entity.position.y, 64, 64);
                 }
             }
+            if (entity.text) {
+                // Draw text above entity
+                game.ctx.fillStyle = 'white';
+                
+                for (let i = 0; i < entity.text.content.length; i++) {
+                    game.ctx.fillText(entity.text.content[i], 
+                        192, 
+                        entity.position.y - 96 + (i * 32));
+                }
+            }
         }
         game.ctx.restore();
     }

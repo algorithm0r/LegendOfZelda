@@ -74,10 +74,16 @@ function loadRoomEntities(game, row, col) {
         }
     }
     
-    // Spawn enemies (when implemented)
-    if (room.enemies) {
-        for (let enemyData of room.enemies) {
-            createEnemy(game, enemyData);
+    // Spawn flames
+    if (room.flames) {
+        for (let flameData of room.flames) {
+            createFlame(game, flameData);
         }
     }
+
+    // Spawn shopkeeper
+    if (room.shopkeeper) {
+        createShopkeeper(game, room.shopkeeper);
+    }
+    
 }
