@@ -10,19 +10,19 @@ function initializePortals() {
             height: 64,
             targetMap: SHOP_7_7,
             targetRoom: {row: 0, col: 0},
-            targetPosition: {x: 480, y: 640}
+            targetPosition: {x: 480, y: 512}
         }
     ];
     
     SHOP_7_7.rooms[0][0].portals = [
         {
-            x: 480,
-            y: 704,
-            width: 32,
-            height: 32,
+            x: 448,
+            y: 640,
+            width: 128,
+            height: 64,
             targetMap: OVERWORLD,
             targetRoom: {row: 7, col: 7},
-            targetPosition: {x: 256, y: 96}
+            targetPosition: {x: 256, y: 128}
         }
     ];
 }
