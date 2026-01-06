@@ -59,6 +59,12 @@ class RenderSystem {
         const tileImage = ASSET_MANAGER.getAsset('./sprites/tileset.png');
         
         game.ctx.save();
+        
+        // Restrict drawing to the game area (pixel 288 to 1024)
+        game.ctx.beginPath();
+        game.ctx.rect(0, 288, 1024, 736); // x, y, width, height
+        game.ctx.clip();
+        
         game.ctx.translate(0, 288);
         
         // Calculate positions for old and new rooms

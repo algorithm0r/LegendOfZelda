@@ -57,3 +57,27 @@ window.requestAnimFrame = (() => {
 const getDistance = (p1, p2) => {
     return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
 };
+
+/**
+ * Room loading utility - spawns portals and enemies for a room
+ * @param {Object} game The game engine instance
+ * @param {Number} row Room row index
+ * @param {Number} col Room column index
+ */
+function loadRoomEntities(game, row, col) {
+    const room = game.currentMap.rooms[row][col];
+    
+    // Spawn portals
+    if (room.portals) {
+        for (let portalData of room.portals) {
+            createPortal(game, portalData);
+        }
+    }
+    
+    // Spawn enemies (when implemented)
+    if (room.enemies) {
+        for (let enemyData of room.enemies) {
+            createEnemy(game, enemyData);
+        }
+    }
+}

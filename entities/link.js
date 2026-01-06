@@ -11,7 +11,7 @@ function createLink(game, x, y) {
         'walk-down': {
             frames: [
                 {x: 0, y: 0},   // Frame 1
-                {x: 0, y: 30}   // Frame 2 (16 + 12px gap)
+                {x: 0, y: 30}   // Frame 2 (16 + 14px gap)
             ],
             duration: 0.15
         },
@@ -66,10 +66,10 @@ function createLink(game, x, y) {
         animator: new Animator(linkAnimations, 'idle-down'),
         // Collision box - smaller than sprite, positioned at Link's body/feet
         collider: new Collider(
-            60,  // width
-            30,  // height
-            2,   // offsetX - center horizontally
-            32   // offsetY - move down so collision is at body/feet
+            48,  // width
+            32,  // height
+            8,   // offsetX - center horizontally
+            28   // offsetY - move down so collision is at body/feet
         ),
         // Health - start with 3 full hearts (6 half-hearts)
         health: new Health(32, 6),

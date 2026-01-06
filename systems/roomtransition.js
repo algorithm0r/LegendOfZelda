@@ -46,22 +46,22 @@ class RoomTransitionSystem {
         switch (player.transition.direction) {
             case 'north':
                 // Sliding up: old room slides up, new room slides in from below
-                player.transition.cameraOffsetY = Math.round(screenHeight * progress);
+                player.transition.cameraOffsetY = Math.floor(screenHeight * progress);
                 player.transition.cameraOffsetX = 0;
                 break;
             case 'south':
                 // Sliding down: old room slides down, new room slides in from above
-                player.transition.cameraOffsetY = -Math.round(screenHeight * progress);
+                player.transition.cameraOffsetY = -Math.floor(screenHeight * progress);
                 player.transition.cameraOffsetX = 0;
                 break;
             case 'west':
                 // Sliding left: old room slides left, new room slides in from right
-                player.transition.cameraOffsetX = Math.round(screenWidth * progress);
+                player.transition.cameraOffsetX = Math.floor(screenWidth * progress);
                 player.transition.cameraOffsetY = 0;
                 break;
             case 'east':
                 // Sliding right: old room slides right, new room slides in from left
-                player.transition.cameraOffsetX = -Math.round(screenWidth * progress);
+                player.transition.cameraOffsetX = -Math.floor(screenWidth * progress);
                 player.transition.cameraOffsetY = 0;
                 break;
         }
@@ -129,8 +129,14 @@ class RoomTransitionSystem {
             tiles: game.currentMap.rooms[newRow][newCol].tiles
         };
         
+        // Mark new room as visited
+        game.currentMap.rooms[newRow][newCol].visited = true;
+
         // Add transition component to player
         player.transition = new Transition(oldRoom, newRoom, direction);
+        
+        // Clear all entities except player
+        game.entities = game.entities.filter(e => e.playercontrolled || e.transition);
         
         // Immediately update current level to new room
         game.currentLevel = {
@@ -140,7 +146,8 @@ class RoomTransitionSystem {
             passableTiles: game.currentLevel.passableTiles
         };
         
-
+        // Spawn entities for new room (uses helper function)
+        loadRoomEntities(game, newRow, newCol);
     }
 
     repositionPlayer(player, direction) {

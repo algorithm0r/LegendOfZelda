@@ -17,15 +17,20 @@ ASSET_MANAGER.downloadAll(() => {
 	// Add systems (order matters!)
 	gameEngine.addSystem(new PlayerInputSystem());  // Process input first
 	gameEngine.addSystem(new MovementSystem());     // Then update positions
-	gameEngine.addSystem(new RoomTransitionSystem()); // Handle edge detection & transition animation
+	gameEngine.addSystem(new PortalSystem());       // Check for portal entry
+	gameEngine.addSystem(new RoomTransitionSystem()); // Handle room transitions
 	gameEngine.addSystem(new AnimationSystem());    // Then update animations
 	gameEngine.addSystem(new RenderSystem());       // Render game world
 	gameEngine.addSystem(new UISystem());           // Finally render UI on top
+
+	// Initialize portal connections between maps
+	initializePortals();
 
 	// Set up current map (overworld for now, dungeons later)
 	gameEngine.currentMap = OVERWORLD;
 	const row = 7;
 	const col = 7;
+	gameEngine.currentMap.rooms[row][col].visited = true;
 	gameEngine.currentLevel = {
 		// 16 tiles wide, 11 tiles tall
 		row: row,
@@ -37,6 +42,9 @@ ASSET_MANAGER.downloadAll(() => {
 
 	// Create Link at center of screen
 	createLink(gameEngine, 500, 500);
+	
+	// Load portals and enemies for starting room
+	loadRoomEntities(gameEngine, row, col);
 
 	gameEngine.start();
 });

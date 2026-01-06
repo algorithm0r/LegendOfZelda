@@ -34,11 +34,12 @@ class MovementSystem {
         
         // Check the 4 corners of the collision box
         const corners = [
-            { x: collisionX + 8, y: collisionY + 8 },                                    // Top-left (with small margin)
-            { x: collisionX + collider.width - 9, y: collisionY + 8 },                   // Top-right
-            { x: collisionX + 8, y: collisionY + collider.height - 9 },                  // Bottom-left
-            { x: collisionX + collider.width - 9, y: collisionY + collider.height - 9 }  // Bottom-right
+            { x: collisionX, y: collisionY },                                    // Top-left
+            { x: collisionX + collider.width, y: collisionY  },                   // Top-right
+            { x: collisionX , y: collisionY + collider.height },                  // Bottom-left
+            { x: collisionX + collider.width, y: collisionY + collider.height }  // Bottom-right
         ];
+        
         
         for (let corner of corners) {
             const tileX = Math.floor(corner.x / 64);

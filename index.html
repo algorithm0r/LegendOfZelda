@@ -25,10 +25,12 @@
     <script type="text/javascript" src="./components/health.js"></script>
     <script type="text/javascript" src="./components/inventory.js"></script>
     <script type="text/javascript" src="./components/transition.js"></script>
+    <script type="text/javascript" src="./components/portal.js"></script>
     
     <!-- Systems -->
     <script type="text/javascript" src="./systems/playerinput.js"></script>
     <script type="text/javascript" src="./systems/movement.js"></script>
+    <script type="text/javascript" src="./systems/portalsystem.js"></script>
     <script type="text/javascript" src="./systems/roomtransition.js"></script>
     <script type="text/javascript" src="./systems/animation.js"></script>
     <script type="text/javascript" src="./systems/render.js"></script>
@@ -36,9 +38,12 @@
     
     <!-- Data -->
     <script type="text/javascript" src="./maps/overworld.js"></script>
+    <script type="text/javascript" src="./maps/portals.js"></script>
+    <script type="text/javascript" src="./maps/shops.js"></script>
     
     <!-- Entity Factories -->
     <script type="text/javascript" src="./entities/link.js"></script>
+    <script type="text/javascript" src="./entities/portalfactory.js"></script>
     
     <!-- Core Engine -->
     <script type="text/javascript" src="./gameengine.js"></script>
@@ -46,5 +51,6 @@
 </head>
 <body>
     <canvas id="gameWorld" width="1024" height="960" style="background: black; border: 2px solid lightgray" tabindex="0" autofocus></canvas>
+    <input type="checkbox" id="debugMode" checked> Debug Mode </input>
 </body>
 </html>
