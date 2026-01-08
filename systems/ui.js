@@ -2,6 +2,7 @@
 class UISystem {
     constructor() {
         this.uiSprite = null; 
+        this.itemSprite = null;
         this.miniMapSprite = this.createMinimapSprite();
         this.debugMode = false;
     }
@@ -16,6 +17,9 @@ class UISystem {
 
         if (!this.uiSprite) {
             this.uiSprite = ASSET_MANAGER.getAsset('./sprites/UI.png');
+        }
+        if (!this.itemSprite) {
+            this.itemSprite = ASSET_MANAGER.getAsset('./sprites/items.png');
         }
 
         // Find the player entity to get health and inventory
@@ -130,9 +134,30 @@ class UISystem {
         game.ctx.fillText('A', aX + 20, aY - 16);
         
         // TODO: Draw B item icon here when items are implemented
-        // TODO: Draw A item icon (usually sword)
+        // Draw A item icon (usually sword)
+        this.drawSword(game.ctx, player.inventory.swordTier || 0, aX + 4, aY + 20);
     }
     
+    drawSword(ctx, tier, x , y) {
+        // Draw sword based on tier using UI sprite
+        if(tier === 0) return; // No sword to draw
+        let sx = 0;
+        let sy = 120;
+        if (tier === 1) {
+            sx = 280;
+        } else if (tier === 2) {
+            sx = 360;
+        } else if (tier === 3) {
+            sx = 90;
+            sy = 90;
+        }
+        ctx.drawImage(
+            this.itemSprite,
+            sx, sy, 16, 16,        
+            x, y, 64, 64    
+        );
+    }
+
     drawRoundedRect(ctx, x, y, width, height, radius) {
         // Manual rounded rect to avoid potential roundRect() performance issues
         ctx.beginPath();

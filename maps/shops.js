@@ -25,6 +25,9 @@ const SHOP_7_7 = {
                     text: ["IT'S DANGEROUS TO GO", "  ALONE! TAKE THIS."],
                     type: 'man_1' 
                 },
+                collectibles: [
+                    { type: 'sword', data: {tier: 1}, x: 480, y: 352 }
+                ],
                 tiles: [
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55],
@@ -42,4 +45,3 @@ const SHOP_7_7 = {
         ]
     ]
 };
-

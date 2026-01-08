@@ -17,13 +17,21 @@ ASSET_MANAGER.downloadAll(() => {
 	gameEngine.init(ctx);
 
 	// Add systems (order matters!)
-	gameEngine.addSystem(new PlayerInputSystem());  // Process input first
-	gameEngine.addSystem(new MovementSystem());     // Then update positions
-	gameEngine.addSystem(new PortalSystem());       // Check for portal entry
-	gameEngine.addSystem(new RoomTransitionSystem()); // Handle room transitions
-	gameEngine.addSystem(new AnimationSystem());    // Then update animations
-	gameEngine.addSystem(new RenderSystem());       // Render game world
-	gameEngine.addSystem(new UISystem());           // Finally render UI on top
+	gameEngine.addSystem(new PlayerInputSystem());       // Process input first
+	gameEngine.addSystem(new RandomMovementSystem());    // Process enemy AI
+	gameEngine.addSystem(new AttackSystem());            // Handle attacks and spawn hitboxes
+	gameEngine.addSystem(new KnockbackSystem());         // Apply knockback velocity
+	gameEngine.addSystem(new MovementSystem());          // Then update positions
+	gameEngine.addSystem(new CombatSystem());            // Check hitbox vs hurtbox collisions
+	gameEngine.addSystem(new InvincibilitySystem());     // Update invincibility timers
+	gameEngine.addSystem(new PortalSystem());            // Check for portal entry
+	gameEngine.addSystem(new RoomTransitionSystem());    // Handle room transitions
+	gameEngine.addSystem(new Pickup());                  // Check for item pickups
+	gameEngine.addSystem(new PickupAnimationSystem());   // Handle pickup animations
+	gameEngine.addSystem(new AnimationSystem());         // Update animations
+	gameEngine.addSystem(new ExpirationSystem());       // Remove expired entities
+	gameEngine.addSystem(new RenderSystem());            // Render game world
+	gameEngine.addSystem(new UISystem());                // Finally render UI on top
 
 	// Initialize portal connections between maps
 	initializePortals();
@@ -44,6 +52,10 @@ ASSET_MANAGER.downloadAll(() => {
 
 	// Create Link at center of screen
 	createLink(gameEngine, 500, 500);
+	
+	// TEST: Spawn some Octoroks
+	createOctorok(gameEngine, 200, 200);
+	createOctorok(gameEngine, 700, 400);
 	
 	// Load portals and enemies for starting room
 	loadRoomEntities(gameEngine, row, col);

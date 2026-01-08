@@ -1,8 +1,7 @@
-// Link entity factory - creates the player character
-function createLink(game, x, y) {
-    // Animation data
-    const linkAnimations = {
-        // Idle animations (16x16 - these reset dimensions after attacks)
+// Octorok entity factory - creates a wandering enemy
+function createOctorok(game, x, y) {
+    // Animation data - adjust coordinates based on enemies.png spritesheet
+    const octorokAnimations = {
         'idle-down': {
             frames: [{x: 0, y: 0, width: 16, height: 16}],
             duration: 0.2
@@ -20,7 +19,7 @@ function createLink(game, x, y) {
             duration: 0.2
         },
         
-        // Walk animations (16x16)
+        // Walk animations (same as idle for now - can add movement frames later)
         'walk-down': {
             frames: [
                 {x: 0, y: 0, width: 16, height: 16},
@@ -48,29 +47,6 @@ function createLink(game, x, y) {
                 {x: 90, y: 30, width: 16, height: 16}
             ],
             duration: 0.15
-        },
-
-        'hold-item': {
-            frames: [{x: 0, y: 150, width: 16, height: 16}],
-            duration: 2.0
-        },
-        
-        // Attack animations (larger sprite dimensions)
-        'attack-down': {
-            frames: [{x: 0, y: 80, width: 16, height: 32}],  // 16x32 source → 64x128 rendered
-            duration: 0.3
-        },
-        'attack-left': {
-            frames: [{x: 20, y: 90, width: 32, height: 16}],  // 32x16 source → 128x64 rendered
-            duration: 0.3
-        },
-        'attack-up': {
-            frames: [{x: 60, y: 80, width: 16, height: 32}],  // 16x32 source → 64x128 rendered
-            duration: 0.3
-        },
-        'attack-right': {
-            frames: [{x: 84, y: 90, width: 32, height: 16}],  // 32x16 source → 128x64 rendered
-            duration: 0.3
         }
     };
     
@@ -78,18 +54,19 @@ function createLink(game, x, y) {
         removeFromWorld: false,
         position: new Position(x, y),
         velocity: new Velocity(0, 0),
-        playercontrolled: new PlayerControlled(240),
         facing: new Facing('down'),
         sprite: new Sprite(
-            ASSET_MANAGER.getAsset('./sprites/link.png'),
+            ASSET_MANAGER.getAsset('./sprites/enemies.png'),
             0, 0, 16, 16
         ),
-        animator: new Animator(linkAnimations, 'idle-down'),
-        collider: new Collider(48, 32, 8, 28),
-        hurtbox: new Collider(48, 32, 8, 28),  // Same as collider - body area
-        attackState: new AttackState(),  // Add attack state
-        health: new Health(32, 6),
-        inventory: new Inventory()
+        animator: new Animator(octorokAnimations, 'idle-down'),
+        collider: new Collider(48, 48, 8, 8),        // 48x48 collision box, slightly offset
+        hurtbox: new Collider(48, 48, 8, 8),         // Same as collider - can be damaged anywhere
+        hitbox: new Collider(48, 48, 8, 8),          // Same as collider - deals contact damage
+        damage: new Damage(1),                       // Deals 0.5 hearts on touch
+        randomMovement: new RandomMovement(80, 1.5), // 80 px/s, change every 1.5 seconds
+        health: new Health(2, 2),                     // 1 full heart (2 half-hearts)
+        enemy: new Enemy(1)                           // Deals 0.5 hearts damage on touch
     };
     
     game.addEntity(entity);

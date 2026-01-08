@@ -59,7 +59,20 @@ const getDistance = (p1, p2) => {
 };
 
 /**
- * Room loading utility - spawns portals and enemies for a room
+ * Checks if two axis-aligned bounding boxes (rectangles) overlap
+ * @param {Object} rect1 Object with x, y, width, height properties
+ * @param {Object} rect2 Object with x, y, width, height properties
+ * @returns {Boolean} True if rectangles overlap
+ */
+const checkAABBCollision = (rect1, rect2) => {
+    return rect1.x < rect2.x + rect2.width &&
+           rect1.x + rect1.width > rect2.x &&
+           rect1.y < rect2.y + rect2.height &&
+           rect1.y + rect1.height > rect2.y;
+};
+
+/**
+ * Room loading utility - spawns portals, enemies, collectibles, and other entities for a room
  * @param {Object} game The game engine instance
  * @param {Number} row Room row index
  * @param {Number} col Room column index
@@ -86,4 +99,16 @@ function loadRoomEntities(game, row, col) {
         createShopkeeper(game, room.shopkeeper);
     }
     
+    // Spawn collectibles
+    if (room.collectibles) {
+        for (let collectibleData of room.collectibles) {
+            createCollectible(
+                game,
+                collectibleData.type,
+                collectibleData.data,
+                collectibleData.x,
+                collectibleData.y
+            );
+        }
+    }
 }

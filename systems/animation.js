@@ -13,8 +13,31 @@ class AnimationSystem {
     }
     
     updateAnimation(entity) {
+        if (entity.pickupAnimation) {
+            // During pickup animation, show "hold-item" pose
+            const newAnim = 'hold-item';
+            if (entity.animator.currentAnimation !== newAnim) {
+                entity.animator.currentAnimation = newAnim;
+                entity.animator.currentFrame = 0;
+                entity.animator.frameTimer = 0;
+            }
+            return; // Don't process other animations during pickup
+        }
         // Determine animation based on movement and facing direction
         if (entity.facing && entity.velocity) {
+            // Attack animation takes priority
+            if (entity.attackState && entity.attackState.isAttacking) {
+                const direction = entity.facing.direction;
+                const newAnim = `attack-${direction}`;
+                
+                if (entity.animator.currentAnimation !== newAnim) {
+                    entity.animator.currentAnimation = newAnim;
+                    entity.animator.currentFrame = 0;
+                    entity.animator.frameTimer = 0;
+                }
+                return; // Don't process movement animations
+            }
+            
             const isMoving = entity.velocity.dx !== 0 || entity.velocity.dy !== 0;
             const direction = entity.facing.direction;
             
@@ -39,6 +62,9 @@ class AnimationSystem {
             const frame = anim.frames[0];
             entity.sprite.frameX = frame.x;
             entity.sprite.frameY = frame.y;
+            // Update sprite dimensions if specified in frame (for attack sprites, etc)
+            if (frame.width !== undefined) entity.sprite.frameWidth = frame.width;
+            if (frame.height !== undefined) entity.sprite.frameHeight = frame.height;
             return;
         }
         
@@ -55,5 +81,8 @@ class AnimationSystem {
         const frame = anim.frames[entity.animator.currentFrame];
         entity.sprite.frameX = frame.x;
         entity.sprite.frameY = frame.y;
+        // Update sprite dimensions if specified in frame
+        if (frame.width !== undefined) entity.sprite.frameWidth = frame.width;
+        if (frame.height !== undefined) entity.sprite.frameHeight = frame.height;
     }
 }

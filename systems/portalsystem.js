@@ -18,22 +18,22 @@ class PortalSystem {
     
     checkCollision(player, portal) {
         // Calculate player's collision box
-        const p1x = player.position.x + player.collider.offsetX;
-        const p1y = player.position.y + player.collider.offsetY;
-        const p1w = player.collider.width;
-        const p1h = player.collider.height;
+        const playerBox = {
+            x: player.position.x + player.collider.offsetX,
+            y: player.position.y + player.collider.offsetY,
+            width: player.collider.width,
+            height: player.collider.height
+        };
         
         // Calculate portal's collision box
-        const p2x = portal.position.x + portal.collider.offsetX;
-        const p2y = portal.position.y + portal.collider.offsetY;
-        const p2w = portal.collider.width;
-        const p2h = portal.collider.height;
+        const portalBox = {
+            x: portal.position.x + portal.collider.offsetX,
+            y: portal.position.y + portal.collider.offsetY,
+            width: portal.collider.width,
+            height: portal.collider.height
+        };
         
-        // AABB collision detection
-        return p1x < p2x + p2w &&
-               p1x + p1w > p2x &&
-               p1y < p2y + p2h &&
-               p1y + p1h > p2y;
+        return checkAABBCollision(playerBox, portalBox);
     }
     
     enterPortal(game, player, portal) {

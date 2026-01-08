@@ -29,10 +29,34 @@ class RenderSystem {
             game.ctx.translate(player.transition.cameraOffsetX, player.transition.cameraOffsetY);
         }
         
+        // Check debug mode
+        const debugModeCheckbox = document.getElementById('debugMode');
+        const debugMode = debugModeCheckbox.checked;
+        
         // Draw all entities on top
         for (let entity of game.entities) {
             if (entity.position) {
-                if (entity.sprite) {
+                // Check if entity should be visible (flicker if invincible)
+                let shouldRender = true;
+                if (entity.invincibility) {
+                    const flickerCycle = Math.floor(entity.invincibility.elapsed / entity.invincibility.flickerInterval);
+                    shouldRender = (flickerCycle % 2 === 0); // Visible on even cycles, invisible on odd
+                }
+                
+                if (shouldRender && entity.sprite) {
+                    // Calculate sprite offset for attacks facing up/left
+                    let offsetX = 0;
+                    let offsetY = 0;
+                    
+                    // Link's attack sprites need offset when facing up or left
+                    if (entity.attackState && entity.attackState.isAttacking && entity.facing) {
+                        if (entity.facing.direction === 'up') {
+                            offsetY = -64;  // Shift sprite up by one tile
+                        } else if (entity.facing.direction === 'left') {
+                            offsetX = -64;  // Shift sprite left by one tile
+                        }
+                    }
+                    
                     // Draw sprite with 4x scaling (16x16 -> 64x64)
                     game.ctx.drawImage(
                         entity.sprite.image,
@@ -40,25 +64,73 @@ class RenderSystem {
                         entity.sprite.frameY,          // Source Y in spritesheet
                         entity.sprite.frameWidth,      // Source width (16)
                         entity.sprite.frameHeight,     // Source height (16)
-                        entity.position.x,             // Destination X
-                        entity.position.y,             // Destination Y
+                        entity.position.x + offsetX,   // Destination X (with offset)
+                        entity.position.y + offsetY,   // Destination Y (with offset)
                         entity.sprite.frameWidth * 4,  // Destination width (64)
                         entity.sprite.frameHeight * 4  // Destination height (64)
                     );
-                } else {
-                    // Fallback: draw colored box for entities without sprites
-                    game.ctx.fillStyle = 'red';
-                    game.ctx.fillRect(entity.position.x, entity.position.y, 64, 64);
-                }
-            }
-            if (entity.text) {
-                // Draw text above entity
-                game.ctx.fillStyle = 'white';
+                } 
                 
-                for (let i = 0; i < entity.text.content.length; i++) {
-                    game.ctx.fillText(entity.text.content[i], 
-                        192, 
-                        entity.position.y - 96 + (i * 32));
+                // Debug: Draw collision boxes
+                if (debugMode) {
+                    // Draw collider (blue) - used for tilemap collision
+                    if (entity.collider) {
+                        game.ctx.strokeStyle = 'rgba(0, 100, 255, 0.7)';
+                        game.ctx.lineWidth = 2;
+                        game.ctx.strokeRect(
+                            entity.position.x + entity.collider.offsetX,
+                            entity.position.y + entity.collider.offsetY,
+                            entity.collider.width,
+                            entity.collider.height
+                        );
+                    }
+                    
+                    // Draw hurtbox (green) - receives damage
+                    if (entity.hurtbox) {
+                        game.ctx.strokeStyle = 'rgba(0, 255, 0, 0.7)';
+                        game.ctx.lineWidth = 2;
+                        game.ctx.strokeRect(
+                            entity.position.x + entity.hurtbox.offsetX,
+                            entity.position.y + entity.hurtbox.offsetY,
+                            entity.hurtbox.width,
+                            entity.hurtbox.height
+                        );
+                    }
+                    
+                    // Draw hitbox (red) - deals damage
+                    if (entity.hitbox) {
+                        game.ctx.strokeStyle = 'rgba(255, 0, 0, 0.7)';
+                        game.ctx.lineWidth = 2;
+                        game.ctx.strokeRect(
+                            entity.position.x + entity.hitbox.offsetX,
+                            entity.position.y + entity.hitbox.offsetY,
+                            entity.hitbox.width,
+                            entity.hitbox.height
+                        );
+                    }
+                }
+                
+                // Text and pickup animations should also flicker
+                if (shouldRender) {
+                    if (entity.text) {
+                        // Draw text above entity
+                        game.ctx.fillStyle = 'white';
+                        
+                        for (let i = 0; i < entity.text.content.length; i++) {
+                            game.ctx.fillText(entity.text.content[i], 
+                                192, 
+                                entity.position.y - 96 + (i * 32));
+                        }
+                    }
+                    if (entity.pickupAnimation) {
+                        // Draw pickup animation above entity
+                        const anim = entity.pickupAnimation;
+                        game.ctx.drawImage(
+                            ASSET_MANAGER.getAsset('./sprites/items.png'),
+                            anim.sprite.frameX, anim.sprite.frameY, 16, 16,  // Source from collectible
+                            entity.position.x - 24, entity.position.y - 64, 64, 64          // Destination
+                        );
+                    }
                 }
             }
         }
