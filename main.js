@@ -23,6 +23,7 @@ ASSET_MANAGER.downloadAll(() => {
 	gameEngine.addSystem(new KnockbackSystem());         // Apply knockback velocity
 	gameEngine.addSystem(new MovementSystem());          // Then update positions
 	gameEngine.addSystem(new CombatSystem());            // Check hitbox vs hurtbox collisions
+	gameEngine.addSystem(new DropSystem());              // Handle enemy drops on death
 	gameEngine.addSystem(new InvincibilitySystem());     // Update invincibility timers
 	gameEngine.addSystem(new PortalSystem());            // Check for portal entry
 	gameEngine.addSystem(new RoomTransitionSystem());    // Handle room transitions

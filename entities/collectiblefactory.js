@@ -15,25 +15,27 @@ function createCollectible(game, type, data, x, y) {
             // Sword sprite - different frames for different tiers
             const swordTier = data.tier || 1;
             let swordX = 0;
-            if (swordTier === 1) { 
-                swordX = 280;
-                swordY = 120;      // Wooden sword
-            }
-            else if (swordTier === 2) {
-                swordX = 360;
-                swordY = 120;      // White sword
-            }
-            else if (swordTier === 3) {
-                swordX = 90;
-                swordY = 90;      // Magical sword
-            }
+            if (swordTier === 1) swordX = 0;      // Wooden sword
+            else if (swordTier === 2) swordX = 16; // White sword
+            else if (swordTier === 3) swordX = 32; // Magical sword
             
-            entity.sprite = new Sprite(itemsImage, swordX, swordY, 16, 16);
+            entity.sprite = new Sprite(itemsImage, swordX, 0, 16, 16);
             break;
         
         case 'heart':
             // Heart sprite
-            entity.sprite = new Sprite(itemsImage, 48, 0, 16, 16);
+            const heartAnimation = {
+                'heart': {
+                    frames: [
+                        { x: 240, y: 195, width: 16, height: 16 },
+                        { x: 270, y: 195, width: 16, height: 16 }
+                    ],
+                    duration: 0.02
+                }
+            }
+            const linkImage = ASSET_MANAGER.getAsset('./sprites/link.png');
+            entity.sprite = new Sprite(linkImage, 240, 195, 16, 16);
+            entity.animator = new Animator(heartAnimation, 'heart');
             // TODO: Add animator for pulsing effect
             break;
         
@@ -46,12 +48,21 @@ function createCollectible(game, type, data, x, y) {
             // Rupee sprite - different colors for different values
             const rupeeAmount = data.amount || 1;
             let rupeeX = 0;
-            if (rupeeAmount === 1) rupeeX = 80;      // Green rupee
-            else if (rupeeAmount === 5) rupeeX = 96;  // Blue rupee
-            else if (rupeeAmount === 20) rupeeX = 112; // Red rupee
+            if (rupeeAmount === 1) rupeeX = 160;      // Flickering rupee
+            else if (rupeeAmount === 5) rupeeX = 200;  // Blue rupee
             
-            entity.sprite = new Sprite(itemsImage, rupeeX, 0, 16, 16);
-            // TODO: Add animator for spinning/sparkling effect
+            const rupeeAnimation = {
+                'rupee': {
+                    frames: [
+                        { x: 160, y: 120, width: 16, height: 16 },
+                        { x: 200, y: 120, width: 16, height: 16 }
+                    ],
+                    duration: 0.02
+                }
+            }
+
+            entity.sprite = new Sprite(itemsImage, rupeeX, 120, 16, 16);
+            if(rupeeAmount === 1) entity.animator = new Animator(rupeeAnimation, 'rupee');
             break;
         
         case 'key':
@@ -61,7 +72,22 @@ function createCollectible(game, type, data, x, y) {
         
         case 'bomb-pickup':
             // Bomb pickup sprite
-            entity.sprite = new Sprite(itemsImage, 144, 0, 16, 16);
+            entity.sprite = new Sprite(itemsImage, 200, 0, 16, 16);
+            break;
+        
+        case 'fairy':
+            // Fairy sprite
+            const fairyAnimation = {
+                'fairy': {
+                    frames: [
+                        { x: 120, y: 40, width: 16, height: 16 },
+                        { x: 160, y: 40, width: 16, height: 16 }
+                    ],
+                    duration: 0.1
+                }
+            }
+            entity.sprite = new Sprite(itemsImage, 120, 40, 16, 16);
+            entity.animator = new Animator(fairyAnimation, 'fairy');
             break;
         
         case 'item':

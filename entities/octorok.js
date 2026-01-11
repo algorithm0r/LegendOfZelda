@@ -65,8 +65,9 @@ function createOctorok(game, x, y) {
         hitbox: new Collider(48, 48, 8, 8),          // Same as collider - deals contact damage
         damage: new Damage(1),                       // Deals 0.5 hearts on touch
         randomMovement: new RandomMovement(80, 1.5), // 80 px/s, change every 1.5 seconds
-        health: new Health(2, 2),                     // 1 full heart (2 half-hearts)
-        enemy: new Enemy(1)                           // Deals 0.5 hearts damage on touch
+        health: new Health(1, 1),                     // 1 full heart (2 half-hearts)
+        enemy: new Enemy(1),                          // Deals 0.5 hearts damage on touch
+        drops: new Drops('default')                   // Reference to octorok drop table
     };
     
     game.addEntity(entity);
