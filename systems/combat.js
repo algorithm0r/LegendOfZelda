@@ -3,7 +3,7 @@ class CombatSystem {
     update(deltaTime, game) {
         // Check debug mode
         const debugModeCheckbox = document.getElementById('debugMode');
-        const debugMode = debugModeCheckbox.checked;
+        const debugMode = debugModeCheckbox ? debugModeCheckbox.checked : false;
         
         // Find all entities with hitboxes (attackers)
         const attackers = game.entities.filter(e => 
@@ -28,6 +28,15 @@ class CombatSystem {
                 
                 // Skip if target is invincible
                 if (target.invincibility) continue;
+                
+                // Skip if target is spawning (poof animation)
+                if (target.spawnEffect && target.spawnEffect.spawning) continue;
+                
+                // Skip if teams match (friendly fire protection)
+                if (attacker.team && target.team && 
+                    attacker.team.team === target.team.team) {
+                    continue;
+                }
                 
                 // Check if hitbox overlaps hurtbox
                 if (this.checkCollision(attacker, target)) {
@@ -64,6 +73,10 @@ class CombatSystem {
                         );
                     }
                     
+                    // Destroy projectile if it has DestroyOnHit component
+                    if (attacker.destroyOnHit) {
+                        attacker.removeFromWorld = true;
+                    }
                     
                     // Check for death
                     if (target.health.current <= 0) {

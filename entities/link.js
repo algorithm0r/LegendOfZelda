@@ -86,10 +86,11 @@ function createLink(game, x, y) {
         ),
         animator: new Animator(linkAnimations, 'idle-down'),
         collider: new Collider(48, 32, 8, 28),
-        hurtbox: new Collider(48, 48, 8, 8), 
+        hurtbox: new Collider(48, 32, 8, 28),  // Same as collider - body area
         attackState: new AttackState(),  // Add attack state
         health: new Health(6, 6),
-        inventory: new Inventory()
+        inventory: new Inventory(),
+        team: new Team("player")  // Link is on the player team
     };
     
     game.addEntity(entity);

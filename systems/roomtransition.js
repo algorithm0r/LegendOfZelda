@@ -70,7 +70,10 @@ class RoomTransitionSystem {
         if (progress >= 1.0) {
             // Position player at opposite edge (they'll slide with the camera)
             this.repositionPlayer(player, player.transition.direction);
-            delete player.transition;
+            // Spawn entities for new room (uses helper function)
+            loadRoomEntities(gameEngine, player.transition.newRoom.row, player.transition.newRoom.col);
+
+            player.transition = null;
         }
     }
 
@@ -145,9 +148,6 @@ class RoomTransitionSystem {
             tiles: newRoom.tiles,
             passableTiles: game.currentLevel.passableTiles
         };
-        
-        // Spawn entities for new room (uses helper function)
-        loadRoomEntities(game, newRow, newCol);
     }
 
     repositionPlayer(player, direction) {

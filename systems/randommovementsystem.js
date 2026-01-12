@@ -3,6 +3,14 @@ class RandomMovementSystem {
     update(deltaTime, game) {
         for (let entity of game.entities) {
             if (entity.randomMovement && entity.velocity && entity.facing && entity.position) {
+                // Don't move while shooting or spawning!
+                if (entity.shootingState && entity.shootingState.isShooting 
+                    || entity.spawnEffect && entity.spawnEffect.spawning) {
+                    entity.velocity.dx = 0;
+                    entity.velocity.dy = 0;
+                    continue;  // Skip rest of movement logic
+                }
+                
                 // Update direction change timer
                 entity.randomMovement.changeTimer += deltaTime;
                 
@@ -82,6 +90,11 @@ class RandomMovementSystem {
     
     // Collision detection (duplicated from MovementSystem - could refactor later)
     collidesWithTilemap(game, entity, x, y) {
+        // Skip collision check while walking in from off-screen
+        if (entity.walkIn && entity.walkIn.active) {
+            return false;
+        }
+        
         const level = game.currentLevel;
         const collider = entity.collider;
         

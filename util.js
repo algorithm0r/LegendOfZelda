@@ -111,4 +111,13 @@ function loadRoomEntities(game, row, col) {
             );
         }
     }
+    
+    // Spawn enemies
+    if (room.enemies) {
+        for (let enemyGroup of room.enemies) {
+            for (let i = 0; i < enemyGroup.count; i++) {
+                ENEMY_FACTORY.create(game, enemyGroup, room);
+            }
+        }
+    }
 }

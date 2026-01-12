@@ -58,10 +58,14 @@ class AttackSystem {
             lifetime: new Lifetime(0.3), // Exists for duration of attack
             hitbox: new Collider(64, 64, 0, 0),  // 64x64 hitbox covers sword area
             damage: new Damage(1),               // Deals 0.5 hearts (1 half-heart)
+            team: new Team("player"),            // Player's attack
         };
         
         game.addEntity(hitbox);
         
-        // TODO: Spawn sword beam if at full health
+        // Spawn sword beam if at full health using ProjectileFactory
+        if (player.health.current === player.health.max) {
+            PROJECTILE_FACTORY.createSwordBeam(game, player, x, y, direction);
+        }
     }
 }

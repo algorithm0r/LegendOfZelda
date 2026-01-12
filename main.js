@@ -9,6 +9,8 @@ ASSET_MANAGER.queueDownload('./sprites/enemies.png');
 ASSET_MANAGER.queueDownload('./sprites/misc.png');
 ASSET_MANAGER.queueDownload('./sprites/items.png');
 ASSET_MANAGER.queueDownload('./sprites/UI.png');
+ASSET_MANAGER.queueDownload('./sprites/death_sequence.png');
+ASSET_MANAGER.queueDownload('./sprites/poof.png');
 
 ASSET_MANAGER.downloadAll(() => {
 	const canvas = document.getElementById("gameWorld");
@@ -18,6 +20,7 @@ ASSET_MANAGER.downloadAll(() => {
 
 	// Add systems (order matters!)
 	gameEngine.addSystem(new PlayerInputSystem());       // Process input first
+	gameEngine.addSystem(new ProjectileAISystem());      // Process projectile AI
 	gameEngine.addSystem(new RandomMovementSystem());    // Process enemy AI
 	gameEngine.addSystem(new AttackSystem());            // Handle attacks and spawn hitboxes
 	gameEngine.addSystem(new KnockbackSystem());         // Apply knockback velocity
@@ -30,7 +33,9 @@ ASSET_MANAGER.downloadAll(() => {
 	gameEngine.addSystem(new Pickup());                  // Check for item pickups
 	gameEngine.addSystem(new PickupAnimationSystem());   // Handle pickup animations
 	gameEngine.addSystem(new AnimationSystem());         // Update animations
-	gameEngine.addSystem(new ExpirationSystem());       // Remove expired entities
+	gameEngine.addSystem(new SpawnEffectSystem());       // Handle spawn animations (poof)
+	gameEngine.addSystem(new DeathEffectSystem());       // Spawn death effects before removal
+	gameEngine.addSystem(new ExpirationSystem());        // Remove expired entities
 	gameEngine.addSystem(new RenderSystem());            // Render game world
 	gameEngine.addSystem(new UISystem());                // Finally render UI on top
 
@@ -53,10 +58,6 @@ ASSET_MANAGER.downloadAll(() => {
 
 	// Create Link at center of screen
 	createLink(gameEngine, 500, 500);
-	
-	// TEST: Spawn some Octoroks
-	createOctorok(gameEngine, 200, 200);
-	createOctorok(gameEngine, 700, 400);
 	
 	// Load portals and enemies for starting room
 	loadRoomEntities(gameEngine, row, col);

@@ -12,15 +12,26 @@ class AnimationSystem {
         }
     }
     
+    resetIfNew(entity, newAnim) {
+        if (entity.animator.currentAnimation !== newAnim) {
+            entity.animator.currentAnimation = newAnim;
+            entity.animator.currentFrame = 0;
+            entity.animator.frameTimer = 0;
+        }
+    }
+
     updateAnimation(entity) {
+        if(entity.spawnEffect && entity.spawnEffect.spawning) {
+            // During spawn effect, show "spawn" animation
+            const newAnim = 'spawn';
+            this.resetIfNew(entity, newAnim);
+            return; // Don't process other animations during spawn
+        }
         if (entity.pickupAnimation) {
             // During pickup animation, show "hold-item" pose
             const newAnim = 'hold-item';
-            if (entity.animator.currentAnimation !== newAnim) {
-                entity.animator.currentAnimation = newAnim;
-                entity.animator.currentFrame = 0;
-                entity.animator.frameTimer = 0;
-            }
+            this.resetIfNew(entity, newAnim);
+     
             return; // Don't process other animations during pickup
         }
         // Determine animation based on movement and facing direction
@@ -29,12 +40,7 @@ class AnimationSystem {
             if (entity.attackState && entity.attackState.isAttacking) {
                 const direction = entity.facing.direction;
                 const newAnim = `attack-${direction}`;
-                
-                if (entity.animator.currentAnimation !== newAnim) {
-                    entity.animator.currentAnimation = newAnim;
-                    entity.animator.currentFrame = 0;
-                    entity.animator.frameTimer = 0;
-                }
+                this.resetIfNew(entity, newAnim);
                 return; // Don't process movement animations
             }
             
@@ -45,11 +51,7 @@ class AnimationSystem {
             const newAnim = isMoving ? `walk-${direction}` : `idle-${direction}`;
             
             // Only change animation if it's different (prevents restarting same animation)
-            if (entity.animator.currentAnimation !== newAnim) {
-                entity.animator.currentAnimation = newAnim;
-                entity.animator.currentFrame = 0;
-                entity.animator.frameTimer = 0;
-            }
+            this.resetIfNew(entity, newAnim);
         }
     }
     

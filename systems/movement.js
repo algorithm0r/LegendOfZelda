@@ -19,12 +19,37 @@ class MovementSystem {
                     entity.position.y = newY;
                 }
                 
+                // Check if walking-in entity has reached the screen
+                if (entity.walkIn && entity.walkIn.active) {
+                    const onScreen = entity.position.x >= 0 && entity.position.x <= 960 &&
+                                    entity.position.y >= 0 && entity.position.y <= 640;
+                    if (onScreen) {
+                        entity.walkIn.active = false; // Enable normal collision/boundaries
+                    }
+                }
+                
+                // Remove projectiles that go off-screen
+                if (entity.destroyOnHit) {
+                    const screenWidth = 1024;   // 16 tiles * 64 pixels
+                    const screenHeight = 704;   // 11 tiles * 64 pixels
+                    
+                    if (entity.position.x < -64 || entity.position.x > screenWidth ||
+                        entity.position.y < -64 || entity.position.y > screenHeight) {
+                        entity.removeFromWorld = true;
+                    }
+                }
+                
                 // Note: Screen edge handling now done by RoomTransitionSystem
             }
         }
     }
     
     collidesWithTilemap(game, entity, x, y) {
+        // Skip collision check while walking in from off-screen
+        if (entity.walkIn && entity.walkIn.active) {
+            return false;
+        }
+        
         const level = game.currentLevel;
         const collider = entity.collider;
         
