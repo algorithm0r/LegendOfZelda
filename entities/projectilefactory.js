@@ -86,7 +86,7 @@ const PROJECTILE_FACTORY = {
             damage: new Damage(1),                // Same damage as sword
             team: new Team("player"),             // Player's projectile
             destroyOnHit: new DestroyOnHit(),     // Destroy when hitting enemy
-            deathEffect: new DeathEffect('particles', 0.5) // Diagonal particles on destruction
+            deathEffect: new DeathEffect('particles', 0.3) // Diagonal particles on destruction
         };
         
         game.addEntity(beam);
@@ -147,8 +147,68 @@ const PROJECTILE_FACTORY = {
         return rock;
     },
     
+    // Create arrow projectile (Moblin)
+    createArrow(game, shooter, direction) {
+        // Position arrow in front of shooter
+        let x = shooter.position.x;
+        let y = shooter.position.y;
+        let velocityX, velocityY;
+        let spriteX, spriteY;
+        const arrowSpeed = 320; // pixels per second (faster than rock)
+        
+        // Offset spawn position and sprite based on direction
+        switch (direction) {
+            case 'up':
+                y -= 64;
+                velocityX = 0;
+                velocityY = -arrowSpeed;
+                spriteX = 180;
+                spriteY = 195;
+                break;
+            case 'down':
+                y += 64;
+                velocityX = 0;
+                velocityY = arrowSpeed;
+                spriteX = 120;
+                spriteY = 195;
+                break;
+            case 'left':
+                x -= 64;
+                velocityX = -arrowSpeed;
+                velocityY = 0;
+                spriteX = 150;
+                spriteY = 195;
+                break;
+            case 'right':
+                x += 64;
+                velocityX = arrowSpeed;
+                velocityY = 0;
+                spriteX = 210;
+                spriteY = 195;
+                break;
+        }
+        
+        const team = shooter.team ? shooter.team.team : "enemy";
+        // Create arrow projectile entity
+        const arrow = {
+            position: new Position(x, y),
+            velocity: new Velocity(velocityX, velocityY),
+            sprite: new Sprite(
+                ASSET_MANAGER.getAsset('./sprites/link.png'),
+                spriteX, spriteY, 16, 16
+            ),
+            hitbox: new Collider(32, 32, 16, 16),  // Same hitbox as rock
+            damage: new Damage(1),                  // Deals 0.5 hearts
+            team: new Team(team),                // Enemy projectile
+            destroyOnHit: new DestroyOnHit(),       // Destroy when hitting player
+            // Arrows don't need death effect for now - just disappear
+        };
+        
+        game.addEntity(arrow);
+        return arrow;
+    },
+    
     // Add more projectile types here as needed:
-    // - createArrow(game, shooter, direction)
     // - createFireball(game, shooter, direction)
     // - createBoomerang(game, shooter, direction) - will need special logic
 };

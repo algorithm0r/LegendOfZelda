@@ -15,6 +15,9 @@ const ENEMY_FACTORY = {
             case 'octorok':
                 enemy = createOctorok(game, spawn.x, spawn.y, enemyGroup.color, enemyGroup.speed);
                 break;
+            case 'moblin':
+                enemy = createMoblin(game, spawn.x, spawn.y, enemyGroup.color, enemyGroup.speed);
+                break;
             // Future enemy types:
             // case 'leever':
             //     enemy = createLeever(game, spawn.x, spawn.y, enemyGroup.color);
@@ -56,7 +59,7 @@ const ENEMY_FACTORY = {
             return null;
         }
         
-        const tile = validTiles[randomInt(validTiles.length)];
+        const tile = validTiles[Math.floor(Math.random() * validTiles.length)];
         return this.tileToWorld(tile.x, tile.y);
     },
     
@@ -68,7 +71,7 @@ const ENEMY_FACTORY = {
             return null;
         }
         
-        const tile = validEdgeTiles[randomInt(validEdgeTiles.length)];
+        const tile = validEdgeTiles[Math.floor(Math.random() * validEdgeTiles.length)];
         const tilePos = this.tileToWorld(tile.x, tile.y);
         
         const walkSpeed = 80;
@@ -148,8 +151,8 @@ const ENEMY_FACTORY = {
     
     tileToWorld(tileX, tileY) {
         return {
-            x: tileX * 64,  // Center of tile
-            y: tileY * 64
+            x: tileX * 64 + 32,  // Center of tile
+            y: tileY * 64 + 32
         };
     }
 };

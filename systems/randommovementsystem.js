@@ -24,6 +24,10 @@ class RandomMovementSystem {
     }
     
     changeDirection(entity, game) {
+        if(entity.walkIn && entity.walkIn.spawning) {
+            return; // Don't change direction while walking in
+        }
+
         const directions = ['up', 'down', 'left', 'right'];
         const validDirections = [];
         
@@ -91,7 +95,7 @@ class RandomMovementSystem {
     // Collision detection (duplicated from MovementSystem - could refactor later)
     collidesWithTilemap(game, entity, x, y) {
         // Skip collision check while walking in from off-screen
-        if (entity.walkIn && entity.walkIn.active) {
+        if (entity.walkIn && entity.walkIn.spawning) {
             return false;
         }
         

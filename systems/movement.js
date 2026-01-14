@@ -20,11 +20,11 @@ class MovementSystem {
                 }
                 
                 // Check if walking-in entity has reached the screen
-                if (entity.walkIn && entity.walkIn.active) {
+                if (entity.walkIn && entity.walkIn.spawning) {
                     const onScreen = entity.position.x >= 0 && entity.position.x <= 960 &&
                                     entity.position.y >= 0 && entity.position.y <= 640;
                     if (onScreen) {
-                        entity.walkIn.active = false; // Enable normal collision/boundaries
+                        entity.walkIn.spawning = false; // Enable normal collision/boundaries
                     }
                 }
                 
@@ -46,7 +46,7 @@ class MovementSystem {
     
     collidesWithTilemap(game, entity, x, y) {
         // Skip collision check while walking in from off-screen
-        if (entity.walkIn && entity.walkIn.active) {
+        if (entity.walkIn && entity.walkIn.spawning) {
             return false;
         }
         

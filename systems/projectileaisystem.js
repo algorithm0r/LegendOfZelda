@@ -14,7 +14,8 @@ class ProjectileAISystem {
                     }
                 } else {
                     // Don't shoot while spawning!
-                    if (entity.spawnEffect && entity.spawnEffect.spawning) {
+                    if ((entity.spawnEffect && entity.spawnEffect.spawning) ||
+                        (entity.walkIn && entity.walkIn.spawning)) {
                         continue;  // Skip shooting logic
                     }
                     // Not shooting - count down to next shot
@@ -25,9 +26,7 @@ class ProjectileAISystem {
                         entity.shootingState.isShooting = true;
                         entity.shootingState.shootTimer = 0;
                         
-                        // Spawn projectile based on enemy type
-                        // For now, we'll assume Octoroks shoot rocks
-                        // Later this could be expanded with a projectileType property
+                        // Spawn projectile based on projectileType
                         this.spawnProjectile(game, entity);
                     }
                 }
@@ -36,9 +35,24 @@ class ProjectileAISystem {
     }
     
     spawnProjectile(game, shooter) {
-        // For now, all shooting enemies shoot rocks
-        // Later we can add a projectileType to ShootingState or Enemy component
         const direction = shooter.facing.direction;
-        PROJECTILE_FACTORY.createRock(game, shooter, direction);
+        const projectileType = shooter.shootingState.projectileType;
+        
+        // Create appropriate projectile based on type
+        switch(projectileType) {
+            case 'rock':
+                PROJECTILE_FACTORY.createRock(game, shooter, direction);
+                break;
+            case 'arrow':
+                PROJECTILE_FACTORY.createArrow(game, shooter, direction);
+                break;
+            // Future projectile types can be added here:
+            // case 'fireball':
+            //     PROJECTILE_FACTORY.createFireball(game, shooter, direction);
+            //     break;
+            default:
+                console.warn(`Unknown projectile type: ${projectileType}`);
+                break;
+        }
     }
 }

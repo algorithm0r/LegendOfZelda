@@ -44,8 +44,8 @@ ASSET_MANAGER.downloadAll(() => {
 
 	// Set up current map (overworld for now, dungeons later)
 	gameEngine.currentMap = OVERWORLD;
-	const row = 7;
-	const col = 7;
+	const row = gameEngine.currentMap.startRoom.y;
+	const col = gameEngine.currentMap.startRoom.x;
 	gameEngine.currentMap.rooms[row][col].visited = true;
 	gameEngine.currentLevel = {
 		// 16 tiles wide, 11 tiles tall
@@ -53,7 +53,7 @@ ASSET_MANAGER.downloadAll(() => {
 		col: col,
 		tiles: OVERWORLD.rooms[row][col].tiles,
 		
-		passableTiles: [2, 22]
+		passableTiles: OVERWORLD.passableTiles
 	};
 
 	// Create Link at center of screen
