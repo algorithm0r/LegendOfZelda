@@ -46,6 +46,10 @@ class ProjectileAISystem {
             case 'arrow':
                 PROJECTILE_FACTORY.createArrow(game, shooter, direction);
                 break;
+            case 'swordbeam':
+                // Spawn sword beam from shooter's position
+                PROJECTILE_FACTORY.createSwordBeam(game, shooter, shooter.position.x, shooter.position.y, direction);
+                break;
             // Future projectile types can be added here:
             // case 'fireball':
             //     PROJECTILE_FACTORY.createFireball(game, shooter, direction);

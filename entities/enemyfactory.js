@@ -18,6 +18,9 @@ const ENEMY_FACTORY = {
             case 'moblin':
                 enemy = createMoblin(game, spawn.x, spawn.y, enemyGroup.color, enemyGroup.speed);
                 break;
+            case 'lynel':
+                enemy = createLynel(game, spawn.x, spawn.y, enemyGroup.color, enemyGroup.speed);
+                break;
             // Future enemy types:
             // case 'leever':
             //     enemy = createLeever(game, spawn.x, spawn.y, enemyGroup.color);

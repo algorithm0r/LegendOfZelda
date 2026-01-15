@@ -73,6 +73,9 @@ const PROJECTILE_FACTORY = {
             }
         };
 
+        // Determine team from shooter (player or enemy)
+        const team = shooter.team ? shooter.team.team : "player";
+
         // Create sword beam entity
         const beam = {
             position: new Position(x, y),
@@ -84,7 +87,7 @@ const PROJECTILE_FACTORY = {
             animator: new Animator(linkAnimations, 'walk-' + direction),
             hitbox: new Collider(64, 64, 0, 0),  // 64x64 hitbox
             damage: new Damage(1),                // Same damage as sword
-            team: new Team("player"),             // Player's projectile
+            team: new Team(team),                 // Inherits shooter's team
             destroyOnHit: new DestroyOnHit(),     // Destroy when hitting enemy
             deathEffect: new DeathEffect('particles', 0.3) // Diagonal particles on destruction
         };
@@ -162,33 +165,32 @@ const PROJECTILE_FACTORY = {
                 y -= 64;
                 velocityX = 0;
                 velocityY = -arrowSpeed;
-                spriteX = 180;
-                spriteY = 195;
+                spriteX = 420;
+                spriteY = 255;
                 break;
             case 'down':
                 y += 64;
                 velocityX = 0;
                 velocityY = arrowSpeed;
-                spriteX = 120;
-                spriteY = 195;
+                spriteX = 420;
+                spriteY = 225;
                 break;
             case 'left':
                 x -= 64;
                 velocityX = -arrowSpeed;
                 velocityY = 0;
-                spriteX = 150;
-                spriteY = 195;
+                spriteX = 390;
+                spriteY = 255;
                 break;
             case 'right':
                 x += 64;
                 velocityX = arrowSpeed;
                 velocityY = 0;
-                spriteX = 210;
+                spriteX = 420;
                 spriteY = 195;
                 break;
         }
         
-        const team = shooter.team ? shooter.team.team : "enemy";
         // Create arrow projectile entity
         const arrow = {
             position: new Position(x, y),
@@ -199,7 +201,7 @@ const PROJECTILE_FACTORY = {
             ),
             hitbox: new Collider(32, 32, 16, 16),  // Same hitbox as rock
             damage: new Damage(1),                  // Deals 0.5 hearts
-            team: new Team(team),                // Enemy projectile
+            team: new Team("enemy"),                // Enemy projectile
             destroyOnHit: new DestroyOnHit(),       // Destroy when hitting player
             // Arrows don't need death effect for now - just disappear
         };
