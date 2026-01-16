@@ -9,7 +9,7 @@
 
 const OVERWORLD = {
     // Starting position (Link starts here)
-    startRoom: { x: 1, y: 0 },
+    startRoom: { x: 10, y: 2 },
     startPosition: { x: 500, y: 500 },
     passableTiles: [2, 22, 131, 14, 58, 18],
     // 16 wide x 8 tall grid of rooms
@@ -104,7 +104,7 @@ const OVERWORLD = {
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55]
                 ],
                 enemies: [
-                    { type: 'lynel', color: 'blue', speed: 100, spawn: 'poof', count: 4 }
+                    { type: 'lynel', color: 'blue', speed: 100, spawn: 'poof', count: 6 }
                 ]
             },
             // Room [0][5]
@@ -124,7 +124,9 @@ const OVERWORLD = {
                 ],
                 enemies: [
                     { type: 'lynel', color: 'red', speed: 100, spawn: 'poof', count: 2 },
-                    { type: 'lynel', color: 'blue', speed: 100, spawn: 'poof', count: 2 }
+                    { type: 'lynel', color: 'blue', speed: 100, spawn: 'poof', count: 2 },
+                    { type: 'leever', color: 'red', spawn: 'poof', count: 1 },
+                    { type: 'leever', color: 'blue', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [0][6]
@@ -144,7 +146,8 @@ const OVERWORLD = {
                 ],
                 enemies: [
                     { type: 'lynel', color: 'red', speed: 100, spawn: 'poof', count: 2 },
-                    { type: 'lynel', color: 'blue', speed: 100, spawn: 'poof', count: 2 }
+                    { type: 'lynel', color: 'blue', speed: 100, spawn: 'poof', count: 2 },
+                    { type: 'peahat', spawn: 'poof', count: 2 }
                 ]
             },
             // Room [0][7]
@@ -214,7 +217,8 @@ const OVERWORLD = {
                     [55, 55, 55, 55, 55, 55, 91, 55, 55, 55, 55, 55, 55, 18, 55, 55]
                 ],
                 enemies: [
-                    { type: 'lynel', color: 'blue', speed: 100, spawn: 'poof', count: 1 }
+                    { type: 'lynel', color: 'blue', speed: 100, spawn: 'poof', count: 1 },
+                    { type: 'zora', color: 'blue', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [0][11]
@@ -231,6 +235,9 @@ const OVERWORLD = {
                     [55, 55, 38,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 36, 55],
                     [55, 55, 55, 37, 37, 37, 37, 18, 37, 37, 37, 37, 37, 37, 55, 55],
                     [55, 55, 55, 55, 55, 55, 55, 18, 55, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'leever', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [0][12]
@@ -247,6 +254,9 @@ const OVERWORLD = {
                     [55, 55, 55, 55, 55, 18, 55, 38,  2,  2,  2,  2, 55, 55, 38,  2],
                     [55, 55, 55, 55, 55, 18, 55, 55, 37, 37, 38, 36, 55, 55, 55, 37],
                     [55, 55, 55, 55, 55, 18, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'tektite', color: 'red', speed: 100, spawn: 'poof', count: 6 }
                 ]
             },
             // Room [0][13]
@@ -263,6 +273,9 @@ const OVERWORLD = {
                     [ 2,  2, 36, 55, 55, 38,  2,  2,  2,  2,  2,  2,  2,  2, 36, 55],
                     [37, 37, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 18, 55, 55],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 18, 55, 55]
+                ],
+                enemies: [
+                    { type: 'tektite', color: 'red', speed: 100, spawn: 'poof', count: 6 }
                 ]
             },
             // Room [0][14]
@@ -338,7 +351,8 @@ const OVERWORLD = {
                 ],
                 enemies: [
                     { type: 'lynel', color: 'red', speed: 100, spawn: 'poof', count: 2 },
-                    { type: 'lynel', color: 'blue', speed: 100, spawn: 'poof', count: 2 }
+                    { type: 'lynel', color: 'blue', speed: 100, spawn: 'poof', count: 2 },
+                    { type: 'peahat', spawn: 'poof', count: 2 }
                 ]
             },
             // Room [1][2]
@@ -416,7 +430,8 @@ const OVERWORLD = {
                 ],
                 enemies: [
                     { type: 'lynel', color: 'red', speed: 100, spawn: 'poof', count: 2 },
-                    { type: 'lynel', color: 'blue', speed: 100, spawn: 'poof', count: 2 }
+                    { type: 'lynel', color: 'blue', speed: 100, spawn: 'poof', count: 2 },
+                    { type: 'peahat', spawn: 'poof', count: 2 }
                 ]
             },
             // Room [1][6]
@@ -449,6 +464,9 @@ const OVERWORLD = {
                     [ 2,  2,  2,  2,  2,  2, 91,  2,  2,  2,  2,  2,  2,  2,  2,  2],
                     [37, 37, 37, 37, 37, 37, 91,  2,  2,  2,  2, 37, 37, 37, 37, 37,],
                     [55, 55, 55, 55, 55, 55, 91,  2,  2,  2,  2, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'zora', color: 'blue', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [1][8]
@@ -465,6 +483,9 @@ const OVERWORLD = {
                     [ 2,  2,  2,  2,  2,  2,  2,  2, 55, 55, 55, 55, 55, 55, 55, 55],
                     [37, 37, 37, 37, 37, 37, 37, 37, 55, 55, 55, 55, 55, 55, 55, 55],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'zora', color: 'blue', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [1][9]
@@ -481,6 +502,9 @@ const OVERWORLD = {
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'zora', color: 'blue', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [1][10]
@@ -497,6 +521,10 @@ const OVERWORLD = {
                     [55, 55, 55, 55, 55, 55, 55,  2,  2,  2,  2,  2,  2,  2,  2, 55],
                     [55, 55, 55, 55, 55, 55, 55, 37, 37, 37, 37, 37, 37, 37, 37, 55],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'tektite', color: 'red', speed: 100, spawn: 'poof', count: 6 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [1][11]
@@ -545,6 +573,9 @@ const OVERWORLD = {
                     [ 2,  2,  2,  2, 36, 55, 38,  2,  2, 90, 91, 91, 91, 91, 91, 91],
                     [37, 37, 18, 37, 55, 55, 55,  2,  2, 90, 91, 91, 91, 91, 91, 91],
                     [55, 55, 18, 55, 55, 55, 55,  2,  2, 90, 91, 91, 91, 91, 91, 91]
+                ],
+                enemies: [
+                    { type: 'peahat', spawn: 'poof', count: 6 }
                 ]
             },
             // Room [1][14]
@@ -561,6 +592,10 @@ const OVERWORLD = {
                     [91, 91, 91, 91, 91, 91, 91, 55, 55,  2,  2,  2,  2,  2,  2,  2],
                     [91, 91, 91, 91, 91, 91, 91, 55, 55, 37, 37, 37, 37, 37, 37, 37],
                     [91, 91, 91, 91, 91, 91, 91, 55, 55, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'tektite', color: 'red', speed: 100, spawn: 'poof', count: 6 },
+                    { type: 'zora', color: 'blue', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [1][15]
@@ -577,6 +612,9 @@ const OVERWORLD = {
                     [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 55, 91],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 91],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 91]
+                ],
+                enemies: [
+                    { type: 'peahat', spawn: 'poof', count: 6 }
                 ]
             }
         ],
@@ -684,6 +722,9 @@ const OVERWORLD = {
                     [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 36, 55],
                     [37, 37, 37, 37, 18, 37, 38, 36, 37, 37, 37, 37, 37, 37, 55, 55],
                     [55, 55, 55, 55, 18, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'peahat', spawn: 'poof', count: 4 }
                 ]
             },
             // Room [2][6]
@@ -700,6 +741,10 @@ const OVERWORLD = {
                     [55, 38,  2,  2,  2, 36, 55, 55, 38, 90, 91, 91, 91, 91, 91, 91],
                     [55, 55,  2,  2, 37, 55, 55, 55, 55, 90, 91, 91, 91, 91, 91, 91],
                     [55, 55,  2,  2, 55, 55, 55, 55, 55, 90, 91, 91, 91, 91, 91, 91]
+                ],
+                enemies: [
+                    { type: 'peahat', spawn: 'poof', count: 6 },
+                    { type: 'zora', color: 'blue', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [2][7]
@@ -716,6 +761,10 @@ const OVERWORLD = {
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91],
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91],
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91]
+                ],
+                enemies: [
+                    { type: 'peahat', spawn: 'poof', count: 6 },
+                    { type: 'zora', color: 'blue', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [2][8]
@@ -732,6 +781,10 @@ const OVERWORLD = {
                     [91, 91, 91, 91, 91, 91, 92,  2,  2,  2,  2,  2,  2,  2, 19,  2],
                     [91, 91, 91, 91, 91, 91, 92,  2,  2, 19, 19, 19, 19, 19, 19, 19],
                     [91, 91, 91, 91, 91, 91, 92,  2,  2, 19, 19, 19, 19, 19, 19, 19]
+                ],
+                enemies: [
+                    { type: 'peahat', spawn: 'poof', count: 6 },
+                    { type: 'zora', color: 'blue', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [2][9]
@@ -748,6 +801,9 @@ const OVERWORLD = {
                     [58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58],
                     [37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'leever', color: 'red', spawn: 'poof', count: 4 }
                 ]
             },
             // Room [2][10]
@@ -764,6 +820,9 @@ const OVERWORLD = {
                     [58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58],
                     [37, 37, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 37],
                     [55, 55, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 55]
+                ],
+                enemies: [
+                    { type: 'leever', color: 'blue', spawn: 'poof', count: 6 }
                 ]
             },
             // Room [2][11]
@@ -780,6 +839,11 @@ const OVERWORLD = {
                     [58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58],
                     [37, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 37, 37],
                     [55, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 55, 55]
+                ],
+                enemies: [
+                    { type: 'peahat', spawn: 'poof', count: 3 },
+                    { type: 'leever', color: 'red', spawn: 'poof', count: 1 },
+                    { type: 'leever', color: 'blue', spawn: 'poof', count: 2 }
                 ]
             },
             // Room [2][12]
@@ -796,6 +860,9 @@ const OVERWORLD = {
                     [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2],
                     [37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'tektite', color: 'red', speed: 100, spawn: 'poof', count: 4 }
                 ]
             },
             // Room [2][13]
@@ -815,7 +882,8 @@ const OVERWORLD = {
                 ],
                 enemies: [
                     { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 3 },
-                    { type: 'octorok', color: 'red', speed: 200, spawn: 'poof', count: 2 }
+                    { type: 'octorok', color: 'red', speed: 200, spawn: 'poof', count: 2 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [2][14]
@@ -834,7 +902,8 @@ const OVERWORLD = {
                     [55, 55,  2,  2,  2,  2,  2,  2,  2, 90, 91, 91, 91, 91, 91, 91]
                 ],
                 enemies: [
-                    { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 4 }
+                    { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 4 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [2][15]
@@ -904,6 +973,11 @@ const OVERWORLD = {
                     [55, 55, 38,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 55, 55, 55],
                     [55, 55, 55, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 55, 55, 55],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'lynel', color: 'red', speed: 100, spawn: 'poof', count: 2 },
+                    { type: 'lynel', color: 'blue', speed: 100, spawn: 'poof', count: 2 },
+                    { type: 'peahat', spawn: 'poof', count: 2 }
                 ]
             },
             // Room [3][3]
@@ -936,6 +1010,9 @@ const OVERWORLD = {
                     [55, 38,  2,  2,  2,  2,  2,  2,  2, 90, 91, 91, 91, 91, 91, 91],
                     [55, 55, 37, 37, 37, 37, 37, 37,  2, 90, 91, 91, 91, 91, 91, 91],
                     [55, 55, 55, 55, 55, 55, 55, 55,  2, 90, 91, 91, 91, 91, 91, 91]
+                ],
+                enemies: [
+                    { type: 'leever', color: 'blue', spawn: 'poof', count: 4 }
                 ]
             },
             // Room [3][5]
@@ -952,6 +1029,9 @@ const OVERWORLD = {
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91],
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91],
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91]
+                ],
+                enemies: [
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 2 }
                 ]
             },
             // Room [3][6]
@@ -968,6 +1048,9 @@ const OVERWORLD = {
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91],
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91],
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91]
+                ],
+                enemies: [
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 2 }
                 ]
             },
             // Room [3][7]
@@ -1007,7 +1090,8 @@ const OVERWORLD = {
                 enemies: [
                     { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 3 },
                     { type: 'octorok', color: 'red', speed: 200, spawn: 'poof', count: 2 },
-                    { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 1 }
+                    { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 1 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 2 }
                 ]
             },
             // Room [3][9]
@@ -1040,6 +1124,11 @@ const OVERWORLD = {
                     [55, 55, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58],
                     [55, 55, 37, 37, 37, 37, 37, 58, 58, 37, 37, 37, 37, 37, 37, 37],
                     [55, 55, 55, 55, 55, 55, 55, 58, 58, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'peahat', spawn: 'poof', count: 3 },
+                    { type: 'leever', color: 'blue', spawn: 'poof', count: 2 },
+                    { type: 'leever', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [3][11]
@@ -1056,6 +1145,9 @@ const OVERWORLD = {
                     [58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 55, 55],
                     [37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 58, 58, 55, 55],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 58, 58, 55, 55]
+                ],
+                enemies: [
+                    { type: 'leever', color: 'blue', spawn: 'poof', count: 4 }
                 ]
             },
             // Room [3][12]
@@ -1113,7 +1205,8 @@ const OVERWORLD = {
                 ],
                 enemies: [
                     { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 3 },
-                    { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 2 }
+                    { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 2 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [3][15]
@@ -1132,7 +1225,8 @@ const OVERWORLD = {
                     [55, 55, 55, 55, 55,  2,  2,  2,  2, 90, 91, 91, 91, 91, 91, 91]
                 ],
                 enemies: [
-                    { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 1  }
+                    { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 1  },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             }
         ],
@@ -1205,6 +1299,9 @@ const OVERWORLD = {
                     [55, 38,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 36, 55],
                     [55, 55, 37, 37, 37, 37, 37,  2,  2, 37, 37, 37, 37, 37, 55, 55],
                     [55, 55, 55, 55, 55, 55, 55,  2,  2, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'peahat', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [4][4]
@@ -1223,7 +1320,8 @@ const OVERWORLD = {
                     [55, 55, 55, 55, 55, 55, 55,  2,  2, 90, 91, 91, 91, 91, 91, 91]
                 ],
                 enemies: [
-                    { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 4 }
+                    { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 4 },
+                    { type: 'zora', color: 'blue', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [4][5]
@@ -1256,6 +1354,9 @@ const OVERWORLD = {
                     [97, 97, 97, 97, 97, 97, 98,  2,  2, 25, 25, 25, 25, 25, 25, 25],
                     [97, 97, 97, 97, 97, 97, 98,  2,  2, 25, 25, 25, 25, 25, 25, 25],
                     [97, 97, 97, 97, 97, 97, 98,  2,  2, 25, 25, 25, 25, 25, 25, 25]
+                ],
+                enemies: [
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [4][7]
@@ -1272,6 +1373,9 @@ const OVERWORLD = {
                     [25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25],
                     [25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25],
                     [25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25]
+                ],
+                enemies: [
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [4][8]
@@ -1288,6 +1392,10 @@ const OVERWORLD = {
                     [25, 25, 25,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 25, 25, 25],
                     [25, 25, 25, 25, 25, 25, 25,  2,  2, 25, 25, 25, 25, 25, 25, 25],
                     [25, 25, 25, 25, 25, 25, 25,  2,  2, 25, 25, 25, 25, 25, 25, 25]
+                ],
+                enemies: [
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 },
+                    { type: 'leever', color: 'red', spawn: 'poof', count: 4 }
                 ]
             },
             // Room [4][9]
@@ -1324,6 +1432,9 @@ const OVERWORLD = {
                     [61, 61, 44,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 42, 61, 61],
                     [61, 61, 61, 44, 42, 43, 43, 43, 43, 43, 43, 43, 43, 61, 61, 61],
                     [61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61]
+                ],
+                enemies: [
+                    { type: 'tektite', color: 'blue', speed: 100, spawn: 'poof', count: 6 }
                 ]
             },
             // Room [4][11]
@@ -1420,7 +1531,8 @@ const OVERWORLD = {
                 ],
                 enemies: [
                     { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 2 },
-                    { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 3 }
+                    { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 3 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             }
         ],
@@ -1520,7 +1632,8 @@ const OVERWORLD = {
                 ],
                 enemies: [
                     { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 2 },
-                    { type: 'octorok', color: 'red', speed: 200, spawn: 'poof', count: 2 }
+                    { type: 'octorok', color: 'red', speed: 200, spawn: 'poof', count: 2 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [5][5]
@@ -1539,7 +1652,8 @@ const OVERWORLD = {
                     [61, 61,  2,  2,  2, 97, 97,  2,  2,  2, 61,  2, 61,  2, 61, 61]
                 ],
                 enemies: [
-                    { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 1 }
+                    { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 1 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [5][6]
@@ -1558,7 +1672,8 @@ const OVERWORLD = {
                     [61, 61, 61, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25]
                 ],
                 enemies: [
-                    { type: 'octorok', color: 'red', speed: 100, spawn: 'walkin', count: 4 }
+                    { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 4 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [5][7]
@@ -1615,6 +1730,10 @@ const OVERWORLD = {
                     [25, 25, 25, 25, 25, 25, 25,  2,  2, 96, 97, 97, 97, 97, 97, 97],
                     [25, 25, 25, 25, 25, 25, 25,  2,  2, 96, 97, 97, 97, 97, 97, 97],
                     [25, 25, 25, 25, 25, 25, 25,  2,  2, 96, 97, 97, 97, 97, 97, 97]
+                ],
+                enemies: [
+                    { type: 'peahat', spawn: 'poof', count: 4 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [5][10]
@@ -1633,7 +1752,8 @@ const OVERWORLD = {
                     [97, 97, 97, 97, 97, 97, 97,  2,  2,  2,  2, 25, 25, 25,  2, 25]
                 ],
                 enemies: [
-                    { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 4 }
+                    { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 4 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [5][11]
@@ -1730,7 +1850,8 @@ const OVERWORLD = {
                 ],
                 enemies: [
                     { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 2 },
-                    { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 3 }
+                    { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 3 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             }
         ],
@@ -1752,6 +1873,11 @@ const OVERWORLD = {
                     [19, 19,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 19, 19],
                     [19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
                     [19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19]
+                ],
+                enemies: [
+                    { type: 'lynel', color: 'red', speed: 100, spawn: 'poof', count: 2 },
+                    { type: 'lynel', color: 'blue', speed: 100, spawn: 'poof', count: 2 },
+                    { type: 'peahat', spawn: 'poof', count: 6 }
                 ]
             },
             // Room [6][1]
@@ -1850,7 +1976,8 @@ const OVERWORLD = {
                 ],
                 enemies: [
                     { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 2 },
-                    { type: 'octorok', color: 'red', speed: 200, spawn: 'poof', count: 2 }
+                    { type: 'octorok', color: 'red', speed: 200, spawn: 'poof', count: 2 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [6][6]
@@ -1927,7 +2054,8 @@ const OVERWORLD = {
                     [25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25]
                 ],
                 enemies: [
-                    { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 4 }
+                    { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 4 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [6][10]
@@ -1947,7 +2075,8 @@ const OVERWORLD = {
                 ],
                 enemies: [
                     { type: 'octorok', color: 'red', speed: 100, spawn: 'poof', count: 2 },
-                    { type: 'octorok', color: 'red', speed: 200, spawn: 'poof', count: 2 }
+                    { type: 'octorok', color: 'red', speed: 200, spawn: 'poof', count: 2 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [6][11]
@@ -2047,7 +2176,8 @@ const OVERWORLD = {
                 ],
                 enemies: [
                     { type: 'octorok', color: 'red', speed: 200, spawn: 'poof', count: 4 },
-                    { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 1 }
+                    { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 1 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             }
         ],
@@ -2069,6 +2199,9 @@ const OVERWORLD = {
                     [55, 55, 55, 38,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2],
                     [55, 55, 55, 55, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'peahat', spawn: 'poof', count: 4 }
                 ]
             },
             // Room [7][1]
@@ -2143,6 +2276,9 @@ const OVERWORLD = {
                     [61, 44,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 42, 61],
                     [61, 61, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 61, 61],
                     [61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61]
+                ],
+                enemies: [
+                    { type: 'tektite', color: 'red', speed: 100, spawn: 'poof', count: 1 }
                 ]
             },
             // Room [7][5]
@@ -2159,6 +2295,11 @@ const OVERWORLD = {
                     [61, 44,  2,  2,  2, 97, 97,  2,  2,  2,  2,  2,  2,  2,  2,  2],
                     [61, 61, 43, 43, 44, 97, 97, 42, 43, 43, 43, 43, 43, 43, 43, 43],
                     [61, 61, 61, 61, 61, 97, 97, 61, 61, 61, 61, 61, 61, 61, 61, 61]
+                ],
+                enemies: [
+                    { type: 'peahat', spawn: 'poof', count: 3 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 },
+                    { type: 'leever', color: 'blue', spawn: 'poof', count: 2 }
                 ]
             },
             // Room [7][6]
@@ -2175,6 +2316,9 @@ const OVERWORLD = {
                     [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 61, 61],
                     [43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 61, 61],
                     [61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61, 61]
+                ],
+                enemies: [
+                    { type: 'tektite', color: 'red', speed: 100, spawn: 'poof', count: 4 }
                 ]
             },
             // Room [7][7]
@@ -2226,6 +2370,9 @@ const OVERWORLD = {
                     [ 2,  2,  2,  2, 36, 38,  2,  2,  2,  2,  2,  2, 36, 55, 55, 55],
                     [36, 37, 37, 37, 55, 55, 38, 36, 37, 37, 37, 37, 37, 55, 55, 55],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'tektite', color: 'blue', speed: 100, spawn: 'poof', count: 5 }
                 ]
             },
             // Room [7][10]
@@ -2242,6 +2389,9 @@ const OVERWORLD = {
                     [55, 55, 55, 55, 38, 36, 38,  2,  2, 38, 55, 55, 55, 55, 55, 55],
                     [55, 55, 55, 55, 55, 55, 55, 38, 36, 55, 55, 55, 55, 55, 55, 55],
                     [55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55]
+                ],
+                enemies: [
+                    { type: 'tektite', color: 'blue', speed: 100, spawn: 'poof', count: 4 }
                 ]
             },
             // Room [7][11]
@@ -2258,6 +2408,10 @@ const OVERWORLD = {
                     [55, 55, 55, 55, 55, 55, 38, 90, 91, 91, 91, 91, 91, 91, 91, 91],
                     [55, 55, 55, 55, 55, 55, 55, 90, 91, 91, 91, 91, 91, 91, 91, 91],
                     [55, 55, 55, 55, 55, 55, 55, 90, 91, 91, 91, 91, 91, 91, 91, 91]
+                ],
+                enemies: [
+                    { type: 'leever', color: 'red', speed: 100, spawn: 'poof', count: 4 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [7][12]
@@ -2274,6 +2428,10 @@ const OVERWORLD = {
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91],
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91],
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91]
+                ],
+                enemies: [
+                    { type: 'leever', color: 'red', speed: 100, spawn: 'poof', count: 4 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [7][13]
@@ -2292,7 +2450,8 @@ const OVERWORLD = {
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91]
                 ],
                 enemies: [
-                    { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 4 }
+                    { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 4 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [7][14]
@@ -2311,7 +2470,8 @@ const OVERWORLD = {
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91]
                 ],
                 enemies: [
-                    { type: 'octorok', color: 'red', speed: 200, spawn: 'poof', count: 4 }
+                    { type: 'octorok', color: 'red', speed: 200, spawn: 'poof', count: 4 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             },
             // Room [7][15]
@@ -2330,7 +2490,8 @@ const OVERWORLD = {
                     [91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91, 91]
                 ],
                 enemies: [
-                    { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 1 }
+                    { type: 'octorok', color: 'blue', speed: 100, spawn: 'poof', count: 1 },
+                    { type: 'zora', color: 'red', spawn: 'poof', count: 1 }
                 ]
             }
         ]

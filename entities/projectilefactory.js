@@ -165,28 +165,28 @@ const PROJECTILE_FACTORY = {
                 y -= 64;
                 velocityX = 0;
                 velocityY = -arrowSpeed;
-                spriteX = 420;
-                spriteY = 255;
+                spriteX = 180;
+                spriteY = 195;
                 break;
             case 'down':
                 y += 64;
                 velocityX = 0;
                 velocityY = arrowSpeed;
-                spriteX = 420;
-                spriteY = 225;
+                spriteX = 120;
+                spriteY = 195;
                 break;
             case 'left':
                 x -= 64;
                 velocityX = -arrowSpeed;
                 velocityY = 0;
-                spriteX = 390;
-                spriteY = 255;
+                spriteX = 150;
+                spriteY = 195;
                 break;
             case 'right':
                 x += 64;
                 velocityX = arrowSpeed;
                 velocityY = 0;
-                spriteX = 420;
+                spriteX = 210;
                 spriteY = 195;
                 break;
         }
@@ -208,6 +208,56 @@ const PROJECTILE_FACTORY = {
         
         game.addEntity(arrow);
         return arrow;
+    },
+    
+    // Create Zora fireball projectile
+    createZoraFireball(game, shooter, dx, dy) {
+        // Calculate direction and velocity
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const fireballSpeed = 240; // pixels per second
+        
+        let velocityX = 0;
+        let velocityY = 0;
+        
+        if (distance > 0) {
+            velocityX = (dx / distance) * fireballSpeed;
+            velocityY = (dy / distance) * fireballSpeed;
+        }
+        
+        // 6-frame animation
+        const fireballAnimations = {
+            'fireball': {
+                frames: [
+                    { x: 330, y: 0, width: 16, height: 16 },
+                    { x: 360, y: 0, width: 16, height: 16 },
+                    { x: 390, y: 0, width: 16, height: 16 },
+                    { x: 330, y: 30, width: 16, height: 16 },
+                    { x: 360, y: 30, width: 16, height: 16 },
+                    { x: 390, y: 30, width: 16, height: 16 }
+                ],
+                duration: 0.02  // Fast animation
+            }
+        };
+        
+        const team = shooter.team ? shooter.team.team : "enemy";
+        
+        // Create fireball projectile entity
+        const fireball = {
+            position: new Position(shooter.position.x, shooter.position.y),
+            velocity: new Velocity(velocityX, velocityY),
+            sprite: new Sprite(
+                ASSET_MANAGER.getAsset('./sprites/enemies.png'),
+                330, 0, 16, 16
+            ),
+            animator: new Animator(fireballAnimations, 'fireball'),
+            hitbox: new Collider(32, 32, 16, 16),  // Same hitbox as other projectiles
+            damage: new Damage(1),                  // Deals 0.5 hearts
+            team: new Team(team),                   // Enemy projectile
+            destroyOnHit: new DestroyOnHit(),       // Destroy when hitting player
+        };
+        
+        game.addEntity(fireball);
+        return fireball;
     },
     
     // Add more projectile types here as needed:

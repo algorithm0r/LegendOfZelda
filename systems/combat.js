@@ -26,11 +26,17 @@ class CombatSystem {
                 // Don't let entities damage themselves
                 if (attacker === target) continue;
                 
+                // Skip if attacker is burrowed
+                if (attacker.burrowAIMovement && attacker.burrowAIMovement.state === 'burrowed') continue;
+                
                 // Skip if target is invincible
                 if (target.invincibility) continue;
                 
                 // Skip if target is spawning (poof animation)
                 if (target.spawnEffect && target.spawnEffect.spawning) continue;
+                
+                // Skip if target is burrowed
+                if (target.burrowAIMovement && target.burrowAIMovement.state === 'burrowed') continue;
                 
                 // Skip if teams match (friendly fire protection)
                 if (attacker.team && target.team && 

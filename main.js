@@ -1,4 +1,5 @@
 const gameEngine = new GameEngine();
+window.gameEngine = gameEngine; // Make globally accessible for systems
 
 const ASSET_MANAGER = new AssetManager();
 
@@ -22,6 +23,9 @@ ASSET_MANAGER.downloadAll(() => {
 	gameEngine.addSystem(new PlayerInputSystem());       // Process input first
 	gameEngine.addSystem(new ProjectileAISystem());      // Process projectile AI
 	gameEngine.addSystem(new WalkingAIMovementSystem()); // Process walking enemy AI
+	gameEngine.addSystem(new HoppingAIMovementSystem()); // Process hopping enemy AI
+	gameEngine.addSystem(new FlyingAIMovementSystem());  // Process flying enemy AI
+	gameEngine.addSystem(new BurrowAIMovementSystem());  // Process burrowing enemy AI
 	gameEngine.addSystem(new AttackSystem());            // Handle attacks and spawn hitboxes
 	gameEngine.addSystem(new KnockbackSystem());         // Apply knockback velocity
 	gameEngine.addSystem(new MovementSystem());          // Then update positions

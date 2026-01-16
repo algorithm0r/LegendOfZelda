@@ -27,6 +27,34 @@ class AnimationSystem {
             this.resetIfNew(entity, newAnim);
             return; // Don't process other animations during spawn
         }
+        
+        // Hopping enemies use 'landed' or 'hopping' animation
+        if (entity.hoppingAIMovement) {
+            const newAnim = entity.hoppingAIMovement.state;
+            this.resetIfNew(entity, newAnim);
+            return; // Don't process other animations for hoppers
+        }
+        
+        // Flying enemies use state-based animations
+        if (entity.flyingAIMovement) {
+            const newAnim = entity.flyingAIMovement.state;
+            this.resetIfNew(entity, newAnim);
+            return; // Don't process other animations for flyers
+        }
+        
+        // Burrowing enemies use state-based animations
+        if (entity.burrowAIMovement) {
+            let newAnim = entity.burrowAIMovement.state;
+            
+            // Special case: Zora surfaced animation depends on facing direction
+            if (entity.burrowAIMovement.isZora && entity.burrowAIMovement.state === 'surfaced') {
+                newAnim = 'surfaced-' + entity.burrowAIMovement.facingDirection;
+            }
+            
+            this.resetIfNew(entity, newAnim);
+            return; // Don't process other animations for burrowers
+        }
+        
         if (entity.pickupAnimation) {
             // During pickup animation, show "hold-item" pose
             const newAnim = 'hold-item';

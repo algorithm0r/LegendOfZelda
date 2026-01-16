@@ -2,7 +2,7 @@
 function createMoblin(game, x, y, color, speed) {
     // Animation data - adjust coordinates based on enemies.png spritesheet
     // Moblins are at different positions than Octoroks
-    let frameX = color === 'red' ? 240 : 360; // Red or blue Moblin
+    let frameX = color === 'red' ? 0 : 120; // Red or blue Moblin
     const moblinAnimations = {
         'spawn': {
             frames: [{x: 60, y: 330, width: 16, height: 16}],
@@ -10,48 +10,48 @@ function createMoblin(game, x, y, color, speed) {
         },
         // Idle animations (16x16)
         'idle-down': {
-            frames: [{x: frameX, y: 0, width: 16, height: 16}],
+            frames: [{x: frameX, y: 120, width: 16, height: 16}],
             duration: 0.2
         },
         'idle-left': {
-            frames: [{x: frameX + 30, y: 0, width: 16, height: 16}],
+            frames: [{x: frameX + 30, y: 120, width: 16, height: 16}],
             duration: 0.2
         },
         'idle-up': {
-            frames: [{x: frameX + 60, y: 0, width: 16, height: 16}],
+            frames: [{x: frameX + 60, y: 120, width: 16, height: 16}],
             duration: 0.2
         },
         'idle-right': {
-            frames: [{x: frameX + 90, y: 0, width: 16, height: 16}],
+            frames: [{x: frameX + 90, y: 120, width: 16, height: 16}],
             duration: 0.2
         },
         
         // Walk animations
         'walk-down': {
             frames: [
-                {x: frameX, y: 0, width: 16, height: 16},
-                {x: frameX, y: 30, width: 16, height: 16}
+                {x: frameX, y: 120, width: 16, height: 16},
+                {x: frameX, y: 150, width: 16, height: 16}
             ],
             duration: 0.15
         },
         'walk-left': {
             frames: [
-                {x: frameX + 30, y: 0, width: 16, height: 16},
-                {x: frameX + 30, y: 30, width: 16, height: 16}
+                {x: frameX + 30, y: 120, width: 16, height: 16},
+                {x: frameX + 30, y: 150, width: 16, height: 16}
             ],
             duration: 0.15
         },
         'walk-up': {
             frames: [
-                {x: frameX + 60, y: 0, width: 16, height: 16},
-                {x: frameX + 60, y: 30, width: 16, height: 16}
+                {x: frameX + 60, y: 120, width: 16, height: 16},
+                {x: frameX + 60, y: 150, width: 16, height: 16}
             ],
             duration: 0.15
         },
         'walk-right': {
             frames: [
-                {x: frameX + 90, y: 0, width: 16, height: 16},
-                {x: frameX + 90, y: 30, width: 16, height: 16}
+                {x: frameX + 90, y: 120, width: 16, height: 16},
+                {x: frameX + 90, y: 150, width: 16, height: 16}
             ],
             duration: 0.15
         }
